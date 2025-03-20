@@ -6,7 +6,7 @@
 ### 문제 풀이 ###
 # 1. cards 리스트 정렬
 # 2. 가장 작은 수와 그 다음으로 작은 수를 두 수의 합으로 변경
-# 3. m번 반복 후, cards 리스트의 합계 반환환
+# 3. m번 반복 후, cards 리스트의 합계 반환
 
 n, m = map(int, input().split(" "))
 cards = list(map(int, input().split(" ")))

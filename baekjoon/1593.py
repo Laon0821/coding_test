@@ -10,7 +10,6 @@
 # 4. window와 target이 같으면, result list에 시작 인덱스 추가
 # +. 반복문을 w의 길이 인덱스부터 시작하기 때문에 처음부터 같은 경우는 별도로 처리
 
-
 import sys
 from collections import Counter
 

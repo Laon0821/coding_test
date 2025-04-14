@@ -19,8 +19,16 @@ problems = []
 for _ in range(n):
     problems.append(list(map(int, sys.stdin.readline().split(" "))))
 
+def cupRamen(li: list) -> int:
+    
+    li.sort(key=lambda x: (x[0], x[1]))
+    result = [0 for _ in range(li[-1][0])]
+    
+    for i in range(len(result)):
+        
+
+
 problems.sort(key=lambda x: (x[0], x[1]))
-number_of_key = len(dict(problems).keys())
 
 
 print(problems)

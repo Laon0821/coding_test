@@ -1,100 +1,54 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "1 4 5 3 2 "
-     ]
-    }
-   ],
-   "source": [
-    "### 문제 정보 ###\n",
-    "# 문제 번호: 2346\n",
-    "# 문제 이름: 풍선 터뜨리기\n",
-    "# 문제 링크: https://www.acmicpc.net/problem/2346\n",
-    "\n",
-    "### 문제 풀이 ###\n",
-    "# 1. 1번 풍선 터뜨리기\n",
-    "# 2. j번 이동하면서 count하고, 풍선 속 숫자와 같아지면 해당 위치 풍선 터뜨리기\n",
-    "# 3. 모든 풍선이 터질 때까지 반복\n",
-    "\n",
-    "# 풍선 개수 입력\n",
-    "n = int(input())\n",
-    "\n",
-    "# 풍선 속 숫자 입력\n",
-    "numbers = list(map(int, input().split(\" \")))\n",
-    "\n",
-    "# 풍선 상태 리스트: 터지지 않았으면 1, 터졌으면 0\n",
-    "balloons = [1 for _ in range(n)]\n",
-    "\n",
-    "i = 0\n",
-    "while True:\n",
-    "    \n",
-    "    # 풍선이 모두 터졌으면 종료\n",
-    "    if sum(balloons) == 0:\n",
-    "        break\n",
-    "    \n",
-    "    else:\n",
-    "        # 1번 풍선 터뜨리고 시작\n",
-    "        if i == 0:\n",
-    "            balloons[i] = 0\n",
-    "            print(i + 1, end=\" \")\n",
-    "            i += 1\n",
-    "            \n",
-    "        # 이후 연산\n",
-    "        else:\n",
-    "            j, count = i, 0\n",
-    "            \n",
-    "            while True:\n",
-    "                # 원형 구현\n",
-    "                if j >= len(balloons):\n",
-    "                    j -= len(balloons)\n",
-    "                elif j < 0:\n",
-    "                    j += len(balloons)\n",
-    "                \n",
-    "                # 연산 완료\n",
-    "                count += balloons[j]\n",
-    "                if count == abs(numbers[i-1]):\n",
-    "                    i = j\n",
-    "                    balloons[i] = 0\n",
-    "                    print(i + 1, end=\" \")\n",
-    "                    count = 0\n",
-    "                    break\n",
-    "                else:\n",
-    "                    # 풍선 속 숫자가 양수이면 오른쪽으로 이동\n",
-    "                    if numbers[i-1] > 0:\n",
-    "                        j += 1\n",
-    "                    # 풍선 속 숫자가 음수이면 왼쪽으로 이동\n",
-    "                    elif numbers[i-1] < 0:\n",
-    "                        j -= 1"
-   ]
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.13.2"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 2
-}
+### 문제 정보 ###
+# 문제 번호: 2346
+# 문제 이름: 풍선 터뜨리기
+# 문제 링크: https://www.acmicpc.net/problem/2346
+
+### 문제 풀이 ###
+# 1. 1번 풍선 터뜨리기
+# 2. j번 이동하면서 count하고, 풍선 속 숫자와 같아지면 해당 위치 풍선 터뜨리기
+# 3. 모든 풍선이 터질 때까지 반복
+
+# 풍선 개수 입력
+n = int(input())
+
+# 풍선 속 숫자 입력
+numbers = list(map(int, input().split(" ")))
+
+# 풍선 상태 리스트: 터지지 않았으면 1, 터졌으면 0
+balloons = [1 for _ in range(n)]
+
+# 1번 풍선 터뜨리고 시작
+balloons[0] = 0
+print(1, end=" ")
+
+# 이후 연산
+i = 0
+while True:
+    
+    # 풍선이 모두 터졌으면 종료
+    if sum(balloons) == 0:
+        break
+    
+    # 그렇지 않으면 추가 연산
+    else:
+        j, count = i, 0
+        
+        while True:
+            # 원형 구현
+            if j >= len(balloons):
+                j -= len(balloons)
+            elif j < 0:
+                j += len(balloons)
+                
+            count += balloons[j]
+            if count == abs(numbers[i]):
+                i = j
+                print(i + 1, end=" ")
+                balloons[i] = 0
+                count = 0
+                break
+            else:
+                if numbers[i] > 0:
+                    j += 1
+                elif numbers[i] < 0:
+                    j -= 1

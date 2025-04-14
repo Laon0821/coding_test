@@ -4,7 +4,7 @@
 # 문제 링크: https://www.acmicpc.net/problem/2751
 
 ### 문제 풀이 ###
-
+# 1. sys Package를 활용하여 입력
 
 import sys
 n = int(sys.stdin.readline())

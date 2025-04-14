@@ -1,54 +1,26 @@
 ### 문제 정보 ###
-# 문제 번호: 1253
-# 문제 이름: 좋다
-# 문제 링크: https://www.acmicpc.net/problem/1253
+# 문제 번호: 1781
+# 문제 이름: 컵라면
+# 문제 링크: https://www.acmicpc.net/problem/1781
 
 ### 문제 풀이 ###
-# 1. 리스트 정렬
-# 2. 리스트의 작은 값부터 하나씩 target으로 지정
-# 3. 왼쪽부터 확인 할 start, 오른쪽부터 확인 할 end 지정
-# 4. start와 end 인덱스 수의 합과 target을 비교하여 범위 좁혀오기
-# 5. 만약, start와 end가 target 인덱스와 같을 경우, 각각 무시하고 넘어가기
+# 1. 같은 데드라인인 경우, 컵라면을 많이 주는 문제를 선택
+# 2. 다음의 우선순위를 기준으로 정렬: (1)데드라인, (2)컵라면
+# 3. 리스트를 딕셔너리로 변경
+## * 딕셔너리에 Key가 존재할 경우, 늦게 입력된 Value로 대체
+## * = 각 데드라인별 최대 컵라면 개수
+# 4. 딕셔너리 Value의 합계 출력
 
 import sys
 
 n = int(sys.stdin.readline())
-n_list = list(map(int, sys.stdin.readline().split(" ")))
 
-def countGoodNumber(li: list) -> int:
-    
-    li.sort()
-    count = 0
-    
-    for i in range(len(li)):
-        
-        target = li[i]
-        
-        start, end = 0, len(li)-1
-        
-        while start < end:
-            
-            if start == i:
-                start += 1
-            elif end == i:
-                end -= 1
-            else:
-                if li[start] + li[end] == target:
-                    count += 1
-                    break
-                elif li[start] + li[end] < target:
-                    start += 1
-                elif li[start] + li[end] > target:
-                    end -= 1
-                
-            # print(f"list: {li}")
-            # print(f"target: {target}")
-            # print(f"li[start]: {li[start]}")
-            # print(f"li[end]: {li[end]}")
-            # print(f"count: {count}")
-            # print("=" * 30)
-                
-    return count
+problems = []
+for _ in range(n):
+    problems.append(list(map(int, sys.stdin.readline().split(" "))))
 
-result = countGoodNumber(n_list)
-print(result)
+problems.sort(key=lambda x: (x[0], x[1]))
+number_of_key = len(dict(problems).keys())
+
+
+print(problems)

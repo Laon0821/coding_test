@@ -1,26 +1,38 @@
 ### 문제 정보 ###
-# 문제 번호: 1781
-# 문제 이름: 컵라면
-# 문제 링크: https://www.acmicpc.net/problem/1781
+# 문제 번호: 1339
+# 문제 이름: 단어 수학
+# 문제 링크: https://www.acmicpc.net/problem/1339
 
 ### 문제 풀이 ###
-# 1. 같은 데드라인인 경우, 컵라면을 많이 주는 문제를 선택
-# 2. 다음의 우선순위를 기준으로 정렬: (1)데드라인, (2)컵라면
-# 3. 리스트를 딕셔너리로 변경
-## * 딕셔너리에 Key가 존재할 경우, 늦게 입력된 Value로 대체
-## * = 각 데드라인별 최대 컵라면 개수
-# 4. 딕셔너리 Value의 합계 출력
+# 1. scores 딕셔너리를 생성해서 각 알파벳 별 점수 저장
+# 2. 점수는 각 알파벳의 가장 큰 자리 수를 계산: 단어의 길이 - 단어 내 알파벳의 인덱스
+# 3. 점수에 따라 scores 정렬 후, 9부터 0까지 value 변경
+# 4. scores의 Key(알파벳)와 Value(숫자)를 기반으로 mapping하여 합계 반환
 
 import sys
 
 n = int(sys.stdin.readline())
 
-problems = []
+flowers = []
 for _ in range(n):
-    problems.append(list(map(int, sys.stdin.readline().split(" "))))
+    tmp = list(map(int, sys.stdin.readline().split(" ")))
 
-problems.sort(key=lambda x: (x[0], x[1]))
-number_of_key = len(dict(problems).keys())
+    start = tmp[0:2]
+    end = tmp[2:4]
+
+    flowers.append([start, end])
+
+flowers.sort(key=lambda x: x[1][0] - x[0][0], reverse=True)
+
+month = [0 for _ in range(12)]
+for flower in flowers:
+    
+    if sum(month) >= 12:
+        break
+    
+    else:
+        month[flower[0][0]:flower[1][0]] = [1 * flower[1][0] - flower[0][0]]
 
 
-print(problems)
+print(flowers)
+print(month)
